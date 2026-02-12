@@ -7,13 +7,13 @@ export class AttendanceService {
   constructor(private prisma: PrismaService) {}
 
   createAttendance(dto: InsertAttendanceDto) {
-    return this.prisma.attendance.create({
+    return this.prisma.attendance2.create({
       data: dto,
     });
   }
 
   getAttendance() {
-    return this.prisma.attendance.findMany({
+    return this.prisma.attendance2.findMany({
       select: {
         id: true,
         fullname: true,
@@ -23,13 +23,14 @@ export class AttendanceService {
   }
 
   getAttendanceById(id: number) {
-    return this.prisma.attendance.findUnique({ where: { id } });
+    return this.prisma.attendance2.findUnique({ where: { id } });
   }
 
   updateAttendance(id: number, data: { fullname: string; schedule: string }) {
-    return this.prisma.attendance.update({
+    return this.prisma.attendance2.update({
       where: { id },
       data,
     });
   }
+
 }
