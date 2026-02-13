@@ -7,23 +7,6 @@ datasource db {
 }
 
 model Attendance {
-  id     Int    @id @default(autoincrement())
-  userId Int    @unique
-  day1   String
-  day2   String
-  day3   String
-  User   User   @relation(fields: [userId], references: [id])
-}
-
-model User {
-  id         Int         @id @default(autoincrement())
-  email      String      @unique
-  password   String
-  createdAt  DateTime    @default(now())
-  Attendance Attendance?
-}
-
-model Attendance2 {
   id       Int    @id @default(autoincrement())
   fullname String
   schedule String
