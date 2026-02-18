@@ -1,15 +1,33 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { InsertAttendanceDto } from './dto/insert-attendance.dto';
+import { AttendanceGateway } from './attendance.gateway';
 
 @Injectable()
 export class AttendanceService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private attendanceGateway: AttendanceGateway
+  ) {}
 
-  createAttendance(dto: InsertAttendanceDto) {
-    return this.prisma.attendance.create({
+  // createAttendance(dto: InsertAttendanceDto) {
+  //   return this.prisma.attendance.create({
+  //     data: dto,
+  //   });
+  // }
+
+  // With websocket broadcasting
+  async createAttendance(dto: InsertAttendanceDto) {
+    const created = await this.prisma.attendance.create({
       data: dto,
     });
+
+    this.attendanceGateway.server.emit('attendance_create', {
+      type: "create",
+      data: created,
+    });
+
+    return created;
   }
 
   getAttendance() {
