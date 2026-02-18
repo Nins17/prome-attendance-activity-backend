@@ -7,7 +7,7 @@ import { AttendanceGateway } from './attendance.gateway';
 export class AttendanceService {
   constructor(
     private prisma: PrismaService,
-    private attendanceGateway: AttendanceGateway
+    private attendanceGateway: AttendanceGateway,
   ) {}
 
   // createAttendance(dto: InsertAttendanceDto) {
