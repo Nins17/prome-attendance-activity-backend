@@ -37,6 +37,9 @@ export class AttendanceService {
         fullname: true,
         schedule: true,
       },
+      orderBy: {
+        id: 'asc'
+      }
     });
   }
 
@@ -44,11 +47,27 @@ export class AttendanceService {
     return this.prisma.attendance.findUnique({ where: { id } });
   }
 
-  updateAttendance(id: number, data: { fullname: string; schedule: string }) {
-    return this.prisma.attendance.update({
+  // updateAttendance(id: number, data: { fullname: string; schedule: string }) {
+  //   return this.prisma.attendance.update({
+  //     where: { id },
+  //     data,
+  //   });
+  // }
+
+  // With websocket broadcasting
+  async updateAttendance(id: number, data: {fullname: string; schedule: string}) {
+    const updated = await this.prisma.attendance.update({
       where: { id },
       data,
     });
+
+    console.log("Broadcasting attendance_update:", updated);
+    this.attendanceGateway.server.emit('attendance_update', {
+      type: "update",
+      data: updated,
+    });
+
+    return updated;
   }
 
 }

@@ -13,7 +13,18 @@ export class AttendanceGateway {
   @WebSocketServer()
   server: Server;
 
+  onModuleInit() {
+    console.log('WebSocket server initialized');
+  }
+
+  // Create attendance
   broadcastAttendanceCreate(payload: any) {
     this.server.emit('attendance_create', payload);
   }
+
+  // Update attendance
+  broadcastAttendanceUpdate(payload: any){
+    this.server.emit('attendance_update', payload);
+  }
+  
 }
