@@ -30,6 +30,7 @@ export class AttendanceService {
     return created;
   }
 
+  // Get all attendance records
   getAttendance() {
     return this.prisma.attendance.findMany({
       select: {
@@ -43,6 +44,21 @@ export class AttendanceService {
     });
   }
 
+  // Get attendance records by schedule
+  getAttendanceBySched(schedule: string) {
+    return this.prisma.attendance.findMany({
+      select: {
+        id: true,
+        fullname: true,
+        schedule: true
+      },
+      where: {
+        schedule: schedule
+      }
+    })
+  }
+
+  // Get a single attendance record by ID
   getAttendanceById(id: number) {
     return this.prisma.attendance.findUnique({ where: { id } });
   }

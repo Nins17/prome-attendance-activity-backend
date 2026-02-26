@@ -29,4 +29,10 @@ export class AttendanceController {
   ) {
     return this.attendanceService.updateAttendance(+id, body);
   }
+
+  // Get attendance records by schedule
+  @Get('schedule/:schedule')
+  getAttendanceBySched(@Param('schedule') schedule: string) {
+    return this.attendanceService.getAttendanceBySched(schedule);
+  }
 }
