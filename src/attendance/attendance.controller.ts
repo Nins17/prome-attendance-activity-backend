@@ -18,8 +18,14 @@ export class AttendanceController {
 
   // attendance.controller.ts
   @Get(':id')
-  getAttendanceById(@Param('id') id: string) {
+  getAttendanceById(@Param('id') id: number) {
     return this.attendanceService.getAttendanceById(+id);
+  }
+  //get user by unique reference id
+  @Get('find/:ref_id')
+  async getUserByRefId(@Param('ref_id') ref_id: string) {
+    const attendee = await this.attendanceService.getUserByRefId(ref_id);
+    return attendee;
   }
 
   @Patch(':id')
