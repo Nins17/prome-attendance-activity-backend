@@ -7,7 +7,7 @@ async function bootstrap() {
 
   app.enableCors({
     origin: [
-      'http://localhost:3001',
+      // 'http://localhost:3001',
       // 'https://prome-attendance-activity-backend-production-30cf.up.railway.app/',
       process.env.FRONTEND_URL, //Url FOR FRONTEND CONNECTION
     ].filter(Boolean),
