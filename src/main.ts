@@ -11,7 +11,7 @@ async function bootstrap() {
       // 'https://prome-attendance-activity-backend-production-30cf.up.railway.app/',
       process.env.FRONTEND_URL, //Url FOR FRONTEND CONNECTION
     ].filter(Boolean),
-    methods: ['GET', 'POST', 'PATCH', 'DELETE'],
+    methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
     credentials: true,
   });
 
